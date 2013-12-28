@@ -1,0 +1,7 @@
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias ll='ls -al'
+alias ls='ls --color=auto'
+alias man='LANG=C man'
+alias hg='LANG=C hg'
+alias objdump='objdump -Mintel'
