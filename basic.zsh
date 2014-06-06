@@ -15,7 +15,5 @@ setopt HIST_ALLOW_CLOBBER   # rewrite a line before storing so that it is not su
 setopt CORRECT              # correct invalid command names
 #setopt EXTENDED_GLOB        # regexps in globs
 
-bindkey -v  # vim mode
-
 # Show full directory path and history event ID
 PS1='%B%F{green}%n@%m%k %B%F{blue}%~ %B%F{black}[%h]%(?..%B%F{red}<%?>)%B%F{blue}%# %b%f%k'
