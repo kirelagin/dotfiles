@@ -1,5 +1,1 @@
-if [ -d ~/.profile.d ]; then
-    for f in $(print -l ~/.profile.d/*(.*N)); do
-        source "$f"
-    done
-fi
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
