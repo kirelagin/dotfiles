@@ -17,7 +17,7 @@
     unstage = reset HEAD --
     com = commit
     cam = commit -am
-    glog = log --graph --date-order
+    glog = log --graph --date-order --abbrev-commit
     verda = !"f() { git remote add verda verda.local:~/repos/$1; }; f"
 
 [rebase]
