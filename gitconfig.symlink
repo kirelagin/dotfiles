@@ -27,4 +27,4 @@
 	user = kirelagin
 
 [push]
-	default = upstream
+	default = simple
