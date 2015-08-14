@@ -1,0 +1,2 @@
+noremap <C-n> gt
+noremap <C-p> gT
