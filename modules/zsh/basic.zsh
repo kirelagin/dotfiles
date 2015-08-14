@@ -14,5 +14,3 @@ setopt NO_CLOBBER           # do not allow > to overwrite files and >> to create
 setopt HIST_ALLOW_CLOBBER   # rewrite a line before storing so that it is not subject to NO_CLOBBER
 setopt CORRECT              # correct invalid command names
 #setopt EXTENDED_GLOB        # regexps in globs
-
-bindkey -v  # vim mode
