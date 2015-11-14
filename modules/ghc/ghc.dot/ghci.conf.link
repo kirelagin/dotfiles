@@ -1,1 +1,2 @@
-:set prompt "GHCi> "
+:set prompt  "λ> "
+:set prompt2 " > "
