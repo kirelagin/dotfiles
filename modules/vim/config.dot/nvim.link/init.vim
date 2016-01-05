@@ -270,6 +270,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'kongo2002/fsharp-vim'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'rust-lang/rust.vim'
 
 NeoBundle 'wlangstroth/vim-racket'
 
