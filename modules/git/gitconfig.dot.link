@@ -26,5 +26,7 @@
 [github]
 	user = kirelagin
 
-[push]
-	default = simple
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
