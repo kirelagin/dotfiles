@@ -1,3 +1,7 @@
+set incsearch
+set surround
+
+
 " Nav: tabs
 noremap <C-n> gt
 noremap <C-p> gT
