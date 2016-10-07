@@ -1,2 +1,2 @@
-alias pbcopy='xsel -b -i'
-alias pbpaste='xsel -b -o'
+which pbcopy  > /dev/null || alias pbcopy='xsel -b -i'
+which pbpaste > /dev/null || alias pbpaste='xsel -b -o'
