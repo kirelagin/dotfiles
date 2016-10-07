@@ -1,5 +1,4 @@
 for sh in "$HOME/.profile.d/"*.sh ; do
-	echo $sh
 	[ -r "$sh" ] && . "$sh"
 done
 unset sh
