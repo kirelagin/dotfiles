@@ -136,8 +136,6 @@ if has('gui_running')
     vmap <C-v> ""c<ESC>"+p
     imap <C-v> <C-r><C-r>+
     cmap <C-v> <C-r><C-r>+
-
-    map <F11> :Goyo<CR>
 else
     let g:indent_guides_auto_colors = 0
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
@@ -206,6 +204,7 @@ function! s:goyo_leave()
 endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+map <F11> :Goyo<CR>
 
 
 "Bundle 'scrooloose/syntastic'
