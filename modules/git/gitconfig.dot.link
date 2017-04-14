@@ -9,7 +9,7 @@
 	ui = auto
 
 [core]
-	pager = less -FX
+	pager = less -+F -X
 	excludesfile = ~/.gitexclude
 
 [alias]
