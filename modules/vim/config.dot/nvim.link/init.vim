@@ -217,7 +217,7 @@ autocmd! BufWritePost * Neomake
 let g:neomake_open_list = 2
 let g:neomake_c_enabled_makers = ['clang']
 let g:neomake_cpp_enabled_makers = ['clang']
-let g:neomake_haskell_enabled_makers = ['ghcmod']
+let g:neomake_haskell_enabled_makers = ['hdevtools']
 let g:neomake_hoq_hoq_maker = {
     \ 'errorformat':
         \ '%f:%l:%c:\ Cannot %tnfer an expressions,' .
