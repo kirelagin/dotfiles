@@ -206,6 +206,8 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 map <F11> :Goyo<CR>
 
+NeoBundle 'rickhowe/diffchar.vim'
+
 
 "Bundle 'scrooloose/syntastic'
 "let g:syntastic_haskell_ghc_mod_args='-g -fno-warn-missing-signatures -g -fno-warn-name-shadowing'
