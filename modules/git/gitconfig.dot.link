@@ -30,3 +30,5 @@
 	tool = vimdiff
 [mergetool]
 	keepBackup = false
+[fetch]
+	recurseSubmodules = false
