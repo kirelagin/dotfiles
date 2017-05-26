@@ -225,6 +225,7 @@ let g:neomake_hoq_hoq_maker = {
         \ '%+C\ \ \ \ %m,'
     \ }
 let g:neomake_hoq_enabled_makers = ['hoq']
+let g:neomake_html_enabled_makers = []
 "let g:neomake_logfile = '/tmp/neomake.log'
 
 
