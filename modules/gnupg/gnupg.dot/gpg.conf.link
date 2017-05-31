@@ -1,0 +1,26 @@
+no-greeting
+
+charset utf-8
+
+keyid-format none
+with-subkey-fingerprint
+
+cert-digest-algo SHA256
+personal-digest-preferences SHA256
+personal-cipher-preferences AES256 AES192 AES
+default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
+
+
+# When verifying a signature made from a subkey, ensure that the cross
+# certification "back signature" on the subkey is present and valid.
+# This protects against a subtle attack against subkeys that can sign.
+# Defaults to --no-require-cross-certification.  However for new
+# installations it should be enabled.
+
+require-cross-certification
+
+
+# Some old Windows platforms require 8.3 filenames.  If your system
+# can handle long filenames, uncomment this.
+
+no-mangle-dos-filenames
