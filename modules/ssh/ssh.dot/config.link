@@ -1,0 +1,2 @@
+Host *.kir.elagin.me
+  ForwardAgent yes
