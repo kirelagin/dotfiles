@@ -60,7 +60,7 @@ in
 #                    mutt-with-sidebar
                     ncdu
                     neovim
-                    nix
+                    nixUnstable
     haskellPackages.pandoc
 #tmp    haskellPackages.pandoc-citeproc
                     python3
