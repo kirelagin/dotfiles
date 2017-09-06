@@ -8,5 +8,6 @@ with pkgs;
   #                      cacert
   #                    python2
   #                    python3
+    watch
   ];
 }
