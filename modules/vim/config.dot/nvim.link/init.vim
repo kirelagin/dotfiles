@@ -48,9 +48,6 @@ set list
 set virtualedit=block
 set showcmd
 
-let g:inkpot_black_background=1
-colorscheme inkpot
-
 map <F1> <Esc>
 imap <F1> <Esc>
 
@@ -117,9 +114,7 @@ autocmd FileType haskell vmap <C-c><C-Enter> :GhciRange<CR>
 "
 """
 
-if has('gui_running')
-    set guifont=DejaVu\ Sans\ Mono\ 10
-
+if has("gui_running") || &t_Co == 88 || &t_Co == 256
     set mouse=a
 
     if has('mouse_sgr')
@@ -137,10 +132,13 @@ if has('gui_running')
     imap <C-v> <C-r><C-r>+
     cmap <C-v> <C-r><C-r>+
 else
+    let g:inkpot_black_background=1
     let g:indent_guides_auto_colors = 0
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgrey
 endif
+
+colorscheme inkpot
 
 
 """
