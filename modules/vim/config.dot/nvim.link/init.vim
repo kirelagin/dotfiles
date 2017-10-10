@@ -103,17 +103,6 @@ set formatoptions-=o
 noremap <silent> gyf :let @+ = expand("%")<CR>
 
 
-"""
-" Haskell
-
-autocmd FileType haskell nmap <C-c><C-l> :w<CR>:GhciFile<CR>
-autocmd FileType haskell nmap <C-c><C-r> :GhciReload<CR>
-autocmd FileType haskell nmap <C-c><C-Enter> :GhciRange<CR>
-autocmd FileType haskell vmap <C-c><C-Enter> :GhciRange<CR>
-
-"
-"""
-
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
     set mouse=a
 
@@ -138,8 +127,6 @@ else
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgrey
 endif
 
-colorscheme inkpot
-
 
 """
 " Plugins
@@ -156,8 +143,14 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'haya14busa/vim-easyoperator-line'
 let g:EasyMotion_smartcase=1
 map <Leader> <Plug>(easymotion-prefix)
-nmap f <Plug>(easymotion-sl)
+nmap f <Plug>(easymotion-fl)
+nmap F <Plug>(easymotion-Fl)
+omap f <Plug>(easymotion-fl)
+omap F <Plug>(easymotion-Fl)
+nmap t <Plug>(easymotion-tl)
+nmap T <Plug>(easymotion-Tl)
 omap t <Plug>(easymotion-tl)
+omap T <Plug>(easymotion-Tl)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 "map  n <Plug>(easymotion-next)
@@ -168,18 +161,20 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup=0
 let g:indent_guides_default_mapping=1
 
+NeoBundle 'tpope/vim-obsession'
+
 NeoBundle 'tpope/vim-sleuth'
 
 NeoBundle 'gmarik/sudo-gui.vim'
 
 NeoBundle 'tomtom/tcomment_vim'
-" map <C-/> :TComment<CR>  " (BROKEN) use gc
-" vmap <C-/> :TComment<CR>gv
-vmap gc :TComment<CR>gv
-map <C-?> :TCommentBlock<CR>
-vmap <C-?> :TCommentBlock<CR>gv
+
+NeoBundle 'godlygeek/tabular'
 
 NeoBundle 'scrooloose/nerdtree'
+let g:NERDTreeSortOrder = ['*', '\.swp$', '\.bak$', '\~$']  " Do not put dirs first
+nmap ,m :NERDTreeToggle<CR>
+nmap ,n :NERDTreeFind<CR>
 
 NeoBundle 'junegunn/goyo.vim'
 let g:goyo_width = 120
@@ -211,19 +206,11 @@ NeoBundle 'rickhowe/diffchar.vim'
 "let g:syntastic_haskell_ghc_mod_args='-g -fno-warn-missing-signatures -g -fno-warn-name-shadowing'
 NeoBundle 'benekastah/neomake'
 autocmd! BufWritePost * Neomake
-"let g:neomake_logfile='/tmp/neomake.log'
-let g:neomake_open_list = 2
-let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_open_list = 0
 let g:neomake_haskell_enabled_makers = ['hdevtools']
-let g:neomake_hoq_hoq_maker = {
-    \ 'errorformat':
-        \ '%f:%l:%c:\ Cannot %tnfer an expressions,' .
-        \ '%E%f:%l:%c:%m,' .
-        \ '%+C\ \ \ \ %m,'
-    \ }
-let g:neomake_hoq_enabled_makers = ['hoq']
-let g:neomake_html_enabled_makers = []
+autocmd ColorScheme *
+  \ hi link NeomakeError SpellBad |
+  \ hi link NeomakeWarning SpellCap
 "let g:neomake_logfile = '/tmp/neomake.log'
 
 
@@ -234,7 +221,12 @@ NeoBundle 'Shougo/vimproc.vim', {
 \   'unix': 'gmake',
 \   }
 \ }
-NeoBundle 'eagletmt/ghcmod-vim'
+
+"NeoBundle 'eagletmt/ghcmod-vim'
+"NeoBundle 'bitc/vim-hdevtools'
+"autocmd FileType haskell nnoremap <buffer> <C-c><C-t> :HdevtoolsType<CR>
+"autocmd FileType haskell nnoremap <buffer> <silent> <C-c><C-q> :HdevtoolsClear<CR>
+
 
 NeoBundle 'tpope/vim-fugitive'
 
@@ -283,3 +275,8 @@ NeoBundleCheck
 
 set vb
 set t_vb=  " No bell
+
+colorscheme inkpot
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
