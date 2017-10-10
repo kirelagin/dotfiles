@@ -23,6 +23,9 @@
 [rebase]
 	autosquash = true
 
+[push]
+	default = current
+
 [github]
 	user = kirelagin
 
