@@ -163,14 +163,9 @@ endif
 
 
 set noswapfile
-set nomodeline  " security: see Gentoo bug #14088 and bug #73715
-set backspace=indent,eol,start
 set hidden
 set encoding=utf-8
 set termencoding=utf-8
-
-set nopaste
-set pastetoggle=<F8>
 
 if has("autocmd")
   autocmd BufReadPost *
@@ -179,22 +174,19 @@ if has("autocmd")
     \ endif
 endif  " restore last cursor position in the file
 
+set expandtab
 set autoindent
 set smartindent
 set shiftround
-"set tabstop=8
-"set softtabstop=4
-"set shiftwidth=4
-set smarttab
-set expandtab
+set tabstop=8
+set softtabstop=2
+set shiftwidth=2
 
 set listchars=tab:▒░,trail:▓,nbsp:␣
 set list
-set virtualedit=block
-set showcmd
+set virtualedit=block,onemore
 
-map <F1> <Esc>
-imap <F1> <Esc>
+set pastetoggle=<F8>
 
 set wmh=0
 map <C-J> <C-W>j<C-W>_
@@ -246,6 +238,7 @@ set t_vb=  " No bell
 
 
 set formatoptions-=o
+set formatoptions+=c
 
 " copy filename
 noremap <silent> gyf :let @+ = expand("%")<CR>
