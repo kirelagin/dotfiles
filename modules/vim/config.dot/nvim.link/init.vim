@@ -1,20 +1,166 @@
 scriptencoding utf-8
 
+let plugin_dir = expand('~/.cache/nvim/plugins')
+let dein_dir = plugin_dir . "/repos/github.com/Shougo/dein.vim"
+
 if has('vim_starting')
   if &compatible
     set nocompatible
   endif
 
-  let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-  if !filereadable(neobundle_readme)
-    echo "Installing NeoBundle..."
+  if !filereadable(dein_dir . '/README.md')
+    echo "Installing dein..."
     echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone 'https://github.com/Shougo/neobundle.vim' ~/.vim/bundle/neobundle.vim
+    silent exec "!mkdir -p " . dein_dir
+    silent exec "!git clone 'https://github.com/Shougo/dein.vim' " . dein_dir
   endif
 
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  let &runtimepath .= "," . dein_dir
 endif
+
+if dein#load_state(plugin_dir)
+  call dein#begin(plugin_dir)
+
+  call dein#add(dein_dir)
+
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('haya14busa/vim-easyoperator-line')
+  let g:EasyMotion_smartcase=1
+  map <Leader> <Plug>(easymotion-prefix)
+  nmap f <Plug>(easymotion-fl)
+  nmap F <Plug>(easymotion-Fl)
+  omap f <Plug>(easymotion-fl)
+  omap F <Plug>(easymotion-Fl)
+  nmap t <Plug>(easymotion-tl)
+  nmap T <Plug>(easymotion-Tl)
+  omap t <Plug>(easymotion-tl)
+  omap T <Plug>(easymotion-Tl)
+  map  / <Plug>(easymotion-sn)
+  omap / <Plug>(easymotion-tn)
+  "map  n <Plug>(easymotion-next)
+  "map  N <Plug>(easymotion-prev)
+  let g:EasyMotion_startofline=0  " keep cursor column for j/k
+
+  call dein#add('nathanaelkane/vim-indent-guides')
+  let g:indent_guides_enable_on_vim_startup=0
+  let g:indent_guides_default_mapping=1
+
+  call dein#add('tpope/vim-obsession')
+
+  call dein#add('tpope/vim-sleuth')
+
+  call dein#add('gmarik/sudo-gui.vim')
+
+  call dein#add('tomtom/tcomment_vim')
+
+  call dein#add('godlygeek/tabular')
+
+  call dein#add('tpope/vim-speeddating')
+
+  call dein#add('scrooloose/nerdtree')
+  let g:NERDTreeSortOrder = ['*', '\.swp$', '\.bak$', '\~$']  " Do not put dirs first
+  nmap ,m :NERDTreeToggle<CR>
+  nmap ,n :NERDTreeFind<CR>
+
+  call dein#add('junegunn/goyo.vim')
+  let g:goyo_width = 120
+  call dein#add('junegunn/limelight.vim')
+  let g:limelight_default_coefficient = '0.7'
+  let g:limelight_conceal_guifg = '#777777'
+  function! s:goyo_enter()
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    let s:old_neomake_open_list = g:neomake_open_list
+    let g:neomake_open_list = 0
+    Limelight
+  endfunction
+  function! s:goyo_leave()
+    set showmode
+    set showcmd
+    set scrolloff=5
+    let g:neomake_open_list = s:old_neomake_open_list
+    Limelight!
+  endfunction
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
+  map <F11> :Goyo<CR>
+
+  call dein#add('rickhowe/diffchar.vim')
+
+
+  "Bundle 'scrooloose/syntastic'
+  "let g:syntastic_haskell_ghc_mod_args='-g -fno-warn-missing-signatures -g -fno-warn-name-shadowing'
+  call dein#add('benekastah/neomake')
+  autocmd! BufWritePost * Neomake
+  let g:neomake_open_list = 0
+  let g:neomake_haskell_enabled_makers = ['hdevtools']
+  autocmd ColorScheme *
+    \ hi link NeomakeError SpellBad |
+    \ hi link NeomakeWarning SpellCap
+  "let g:neomake_logfile = '/tmp/neomake.log'
+
+
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+
+  "call dein#add('eagletmt/ghcmod-vim')
+  "call dein#add('bitc/vim-hdevtools')
+  "autocmd FileType haskell nnoremap <buffer> <C-c><C-t> :HdevtoolsType<CR>
+  "autocmd FileType haskell nnoremap <buffer> <silent> <C-c><C-q> :HdevtoolsClear<CR>
+
+
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-rhubarb')
+
+  call dein#add('mattn/webapi-vim')
+  call dein#add('mattn/gist-vim')
+  let g:gist_update_on_write=2  " Update gists on :w!
+
+  "Bundle 'kien/ctrlp.vim'
+  ""let g:ctrlp_working_path_mode='rc'
+  "let g:ctrlp_by_filename=1
+  "let g:ctrlp_clear_cache_on_exit=0
+  "nmap <C-b> :CtrlPBuffer<CR>
+  "imap <C-b> <ESC>:CtrlPBuffer<CR>
+
+  call dein#add('Shougo/unite.vim')
+  " Like ctrlp.vim settings.
+  nmap <C-p> :<C-u>Unite -start-insert -winheight=10
+  \                      -direction=botright -buffer-name=files
+  \                      buffer bookmark file_rec/git<CR>
+  let g:unite_source_history_yank_enable = 1
+  nnoremap <leader>y :<C-u>Unite history/yank<CR>
+
+
+  call dein#add('tpope/vim-git')
+  "Bundle 'plasticboy/vim-markdown'
+  call dein#add('vim-pandoc/vim-pandoc')
+  set spellfile=~/.config/vim/spell/ru.utf-8.add,~/.config/vim/spell/en.utf-8.add
+  "let g:pandoc#spell#default_langs=['en', 'ru']
+  set spelllang=en,ru
+  call dein#add('vim-pandoc/vim-pandoc-syntax')
+  call dein#add('ap/vim-css-color')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('kongo2002/fsharp-vim')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('derekwyatt/vim-scala')
+  call dein#add('rust-lang/rust.vim')
+  call dein#add('LnL7/vim-nix')
+  call dein#add('jceb/vim-orgmode')
+
+  call dein#add('wlangstroth/vim-racket')
+
+  call dein#end()
+  call dein#save_state()
+endif
+" Required by dein:
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
+
 
 set noswapfile
 set nomodeline  " security: see Gentoo bug #14088 and bug #73715
@@ -25,7 +171,6 @@ set termencoding=utf-8
 
 set nopaste
 set pastetoggle=<F8>
-syn on
 
 if has("autocmd")
   autocmd BufReadPost *
@@ -96,6 +241,9 @@ set ignorecase
 set smartcase
 nmap <Leader>q :nohl<CR>
 
+set vb
+set t_vb=  " No bell
+
 
 set formatoptions-=o
 
@@ -126,155 +274,6 @@ else
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=darkgrey
 endif
-
-
-"""
-" Plugins
-"""
-
-"call vundle#begin()
-call neobundle#begin()
-
-"Bundle 'gmarik/vundle'
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'haya14busa/vim-easyoperator-line'
-let g:EasyMotion_smartcase=1
-map <Leader> <Plug>(easymotion-prefix)
-nmap f <Plug>(easymotion-fl)
-nmap F <Plug>(easymotion-Fl)
-omap f <Plug>(easymotion-fl)
-omap F <Plug>(easymotion-Fl)
-nmap t <Plug>(easymotion-tl)
-nmap T <Plug>(easymotion-Tl)
-omap t <Plug>(easymotion-tl)
-omap T <Plug>(easymotion-Tl)
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-"map  n <Plug>(easymotion-next)
-"map  N <Plug>(easymotion-prev)
-let g:EasyMotion_startofline=0  " keep cursor column for j/k
-
-NeoBundle 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup=0
-let g:indent_guides_default_mapping=1
-
-NeoBundle 'tpope/vim-obsession'
-
-NeoBundle 'tpope/vim-sleuth'
-
-NeoBundle 'gmarik/sudo-gui.vim'
-
-NeoBundle 'tomtom/tcomment_vim'
-
-NeoBundle 'godlygeek/tabular'
-
-NeoBundle 'scrooloose/nerdtree'
-let g:NERDTreeSortOrder = ['*', '\.swp$', '\.bak$', '\~$']  " Do not put dirs first
-nmap ,m :NERDTreeToggle<CR>
-nmap ,n :NERDTreeFind<CR>
-
-NeoBundle 'junegunn/goyo.vim'
-let g:goyo_width = 120
-NeoBundle 'junegunn/limelight.vim'
-let g:limelight_default_coefficient = '0.7'
-let g:limelight_conceal_guifg = '#777777'
-function! s:goyo_enter()
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  let g:neomake_open_list = 0
-  Limelight
-endfunction
-function! s:goyo_leave()
-  set showmode
-  set showcmd
-  set scrolloff=5
-  let g:neomake_open_list = 1
-  Limelight!
-endfunction
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-map <F11> :Goyo<CR>
-
-NeoBundle 'rickhowe/diffchar.vim'
-
-
-"Bundle 'scrooloose/syntastic'
-"let g:syntastic_haskell_ghc_mod_args='-g -fno-warn-missing-signatures -g -fno-warn-name-shadowing'
-NeoBundle 'benekastah/neomake'
-autocmd! BufWritePost * Neomake
-let g:neomake_open_list = 0
-let g:neomake_haskell_enabled_makers = ['hdevtools']
-autocmd ColorScheme *
-  \ hi link NeomakeError SpellBad |
-  \ hi link NeomakeWarning SpellCap
-"let g:neomake_logfile = '/tmp/neomake.log'
-
-
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build': {
-\   'mac' : 'make -f make_mac.mak',
-\   'linux': 'make',
-\   'unix': 'gmake',
-\   }
-\ }
-
-"NeoBundle 'eagletmt/ghcmod-vim'
-"NeoBundle 'bitc/vim-hdevtools'
-"autocmd FileType haskell nnoremap <buffer> <C-c><C-t> :HdevtoolsType<CR>
-"autocmd FileType haskell nnoremap <buffer> <silent> <C-c><C-q> :HdevtoolsClear<CR>
-
-
-NeoBundle 'tpope/vim-fugitive'
-
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mattn/gist-vim'
-let g:gist_update_on_write=2  " Update gists on :w!
-
-"Bundle 'kien/ctrlp.vim'
-""let g:ctrlp_working_path_mode='rc'
-"let g:ctrlp_by_filename=1
-"let g:ctrlp_clear_cache_on_exit=0
-"nmap <C-b> :CtrlPBuffer<CR>
-"imap <C-b> <ESC>:CtrlPBuffer<CR>
-
-NeoBundle 'Shougo/unite.vim'
-" Like ctrlp.vim settings.
-nmap <C-p> :<C-u>Unite -start-insert -winheight=10
-\                      -direction=botright -buffer-name=files
-\                      buffer bookmark file_rec/git<CR>
-let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :<C-u>Unite history/yank<CR>
-
-
-NeoBundle 'tpope/vim-git'
-"Bundle 'plasticboy/vim-markdown'
-NeoBundle 'vim-pandoc/vim-pandoc'
-set spellfile=~/.config/vim/spell/ru.utf-8.add,~/.config/vim/spell/en.utf-8.add
-"let g:pandoc#spell#default_langs=['en', 'ru']
-set spelllang=en,ru
-NeoBundle 'vim-pandoc/vim-pandoc-syntax'
-NeoBundle 'ap/vim-css-color'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'kongo2002/fsharp-vim'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'LnL7/vim-nix'
-
-NeoBundle 'wlangstroth/vim-racket'
-
-"call vundle#end()
-call neobundle#end()
-filetype plugin indent on  " required by Vundle
-
-NeoBundleCheck
-
-set vb
-set t_vb=  " No bell
 
 colorscheme inkpot
 
