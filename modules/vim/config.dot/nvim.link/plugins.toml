@@ -1,0 +1,242 @@
+##########
+##
+#  Plugins
+##
+##########
+
+
+[[plugins]]
+  repo = 'Shougo/dein.vim'
+
+[[plugins]]
+  repo = 'Shougo/vimproc.vim'
+  build = 'make'
+
+[[plugins]]
+  repo = 'mattn/webapi-vim'
+
+
+
+##########
+##
+#  Editing
+##
+##########
+
+[[plugins]]
+  # Guess indent options
+  repo = 'tpope/vim-sleuth'
+
+[[plugins]]
+  # Preview colours (not only in CSS)
+  repo = 'ap/vim-css-color'
+
+[[plugins]]
+  repo = 'nathanaelkane/vim-indent-guides'
+  hook_source = '''
+    let g:indent_guides_enable_on_vim_startup=0
+  '''
+  hook_add = '''
+    nmap <silent> <Leader>ig <Plug>IndentGuidesToggle
+  '''
+
+[[plugins]]
+  repo = 'Lokaltog/vim-easymotion'
+  hook_add = '''
+    let g:EasyMotion_smartcase=1
+
+    map <Leader> <Plug>(easymotion-prefix)
+    nmap f <Plug>(easymotion-fl)
+    nmap F <Plug>(easymotion-Fl)
+    omap f <Plug>(easymotion-fl)
+    omap F <Plug>(easymotion-Fl)
+    nmap t <Plug>(easymotion-tl)
+    nmap T <Plug>(easymotion-Tl)
+    omap t <Plug>(easymotion-tl)
+    omap T <Plug>(easymotion-Tl)
+    map  / <Plug>(easymotion-sn)
+    omap / <Plug>(easymotion-tn)
+    "map  n <Plug>(easymotion-next)
+    "map  N <Plug>(easymotion-prev)
+    let g:EasyMotion_startofline=0  " keep cursor column for j/k
+  '''
+
+[[plugins]]
+  repo = 'haya14busa/vim-easyoperator-line'
+
+[[plugins]]
+  repo = 'junegunn/limelight.vim'
+  hook_add = '''
+    let g:limelight_priority = -1
+    let g:limelight_default_coefficient = 0.7
+    let g:limelight_conceal_guifg = '#777777'
+  '''
+  lazy = 1
+
+[[plugins]]
+  repo = 'junegunn/goyo.vim'
+  depends = 'limelight.vim'
+  hook_add = '''
+    let g:goyo_width = 120
+
+    function! s:goyo_enter()
+      set noshowmode
+      set noshowcmd
+      let s:old_scrolloff = &scrolloff
+      let &scrolloff = 999
+      let s:old_neomake_open_list = g:neomake_open_list
+      let g:neomake_open_list = 0
+      Limelight
+    endfunction
+    function! s:goyo_leave()
+      set showmode
+      set showcmd
+      let &scrolloff = s:old_scrolloff
+      let g:neomake_open_list = s:old_neomake_open_list
+      Limelight!
+    endfunction
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+    map <silent> <F11> :Goyo<CR>
+    imap <silent> <F11> <C-o>:Goyo<CR>
+  '''
+  lazy = 1
+
+[[plugins]]
+  repo = 'rickhowe/diffchar.vim'
+
+[[plugins]]
+  repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+  repo = 'tpope/vim-obsession'
+
+
+##########
+##
+#  Utilities
+##
+##########
+
+[[plugins]]
+  repo = 'neomake/neomake'
+  hook_add = '''
+    let g:neomake_open_list = 0
+    "let g:neomake_logfile = '/tmp/neomake.log'
+
+    let g:neomake_haskell_enabled_makers = ['hdevtools']
+
+    autocmd ColorScheme *
+      \ hi link NeomakeError SpellBad |
+      \ hi link NeomakeWarning SpellCap
+    "autocmd! BufWritePost * Neomake
+  '''
+
+[[plugins]]
+  repo = 'sbdchd/neoformat'
+
+[[plugins]]
+  repo = 'Shougo/denite.nvim'
+  hook_add = '''
+    call denite#custom#option('default', {
+      \ 'auto-preview': 'true',
+      \ 'auto-resize': 'true',
+      \ 'direction': 'dynamicbottom',
+      \ 'matchers': 'substring',
+      \ 'vertical-preview': 'true',
+      \ 'winheight': '10',
+      \ })
+    call denite#custom#map(
+      \ 'insert',
+      \ '<C-j>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+    call denite#custom#map(
+      \ 'insert',
+      \ '<C-k>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \ )
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+    nnoremap <silent> <C-p> :<C-u>Denite
+      \ -highlight-matched-char=Underlined
+      \ -highlight-matched-range=None
+      \ -matchers=matcher_substring
+      \ buffer
+      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+  '''
+
+[[plugins]]
+  repo = 'scrooloose/nerdtree'
+  hook_add = '''
+    let g:NERDTreeSortOrder = ['*', '\.swp$', '\.bak$', '\~$']  " Do not put dirs first
+    nmap <silent> ,m :NERDTreeToggle<CR>
+    nmap <silent> ,n :NERDTreeFind<CR>
+  '''
+  #on_map = [',m', ',n']
+
+[[plugins]]
+  repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+  # GitHub stuff for fugitive
+  repo = 'tpope/vim-rhubarb'
+
+[[plugins]]
+  repo = 'mattn/gist-vim'
+  depends = 'webapi'
+  hook_add = '''
+    let g:gist_update_on_write=2  " Update gists on :w!
+  '''
+
+[[plugins]]
+  repo = 'whiteinge/diffconflicts'
+
+
+##########
+##
+#  Syntax
+##
+##########
+
+# Markup
+
+[[plugins]]
+  repo = 'cespare/vim-toml'
+  on_ft = 'toml'
+
+[[plugins]]
+  repo = 'vim-pandoc/vim-pandoc-syntax'
+  on_ft = 'pandoc'
+
+[[plugins]]
+  repo = 'jceb/vim-orgmode'
+  on_ft = 'org'
+
+
+# Programming
+
+[[plugins]]
+  repo = 'tpope/vim-git'
+  on_ft = ['git', 'gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail']
+
+[[plugins]]
+  repo = 'LnL7/vim-nix'
+  on_ft = 'nix'
+
+[[plugins]]
+  repo = 'rust-lang/rust.vim'
+  on_ft = 'rust'
+
+[[plugins]]
+  repo = 'pangloss/vim-javascript'
+  on_ft = 'javascript'
+
+[[plugins]]
+  repo = 'kchmck/vim-coffee-script'
+  on_ft = ['coffee', 'litcoffee']
