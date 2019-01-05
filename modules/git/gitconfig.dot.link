@@ -35,7 +35,7 @@
 	user = kirelagin
 
 [merge]
-	tool = vimdiff
+	tool = diffconflicts
 [mergetool]
 	keepBackup = false
 [fetch]
@@ -43,3 +43,7 @@
 
 [gpg]
 	program = gpg2
+
+[mergetool "diffconflicts"]
+	cmd = nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = true
