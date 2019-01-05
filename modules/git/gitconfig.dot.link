@@ -17,7 +17,13 @@
 	unstage = reset HEAD --
 	com = commit
 	cam = commit -am
-	glog = log --graph --date-order --abbrev-commit
+	log = log --format=my-signature
+	glog = log --graph --date-order --format=my-signature
+	sign = commit --amend --no-edit -S
+
+[pretty]
+	my = format:"%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%n    %s%n"
+	my-signature = format:"%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%C(dim)Signed: [%G?]% GS%Creset%n%n    %s%n"
 
 [rebase]
 	autosquash = true
@@ -34,3 +40,6 @@
 	keepBackup = false
 [fetch]
 	recurseSubmodules = false
+
+[gpg]
+	program = gpg2
