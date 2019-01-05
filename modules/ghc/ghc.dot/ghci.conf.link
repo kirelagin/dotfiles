@@ -1,2 +1,6 @@
-:set prompt  "λ> "
-:set prompt2 " > "
+:set prompt "\ESC[7mλ>\ESC[m "
+:set prompt-cont " > "
+
+:set -freverse-errors
+
+:set +m
