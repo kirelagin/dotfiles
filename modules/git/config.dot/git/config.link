@@ -10,7 +10,6 @@
 
 [core]
 	pager = less -+F -X
-	excludesfile = ~/.gitexclude
 
 [alias]
 	st = status
