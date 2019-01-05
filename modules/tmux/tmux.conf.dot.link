@@ -1,0 +1,49 @@
+set -g prefix `
+unbind-key C-b
+bind ` send-prefix
+
+set -g default-terminal "screen-256color"
+setw -g aggressive-resize on
+
+set -g status-bg colour12
+set -g status-fg black
+set -g status-right-bg black
+set -g status-right-fg white
+set -g status-left ""
+set -g status-right "| #[fg=green,bright]%H:%M:%S#[default] "
+setw -g window-status-format " #I #W "
+setw -g window-status-bell-bg red
+setw -g window-status-bell-fg colour12
+setw -g window-status-current-bg black
+setw -g window-status-current-attr bright
+setw -g window-status-current-format " #I #W "
+
+set -g status-interval 1
+
+set -g pane-border-fg colour103
+set -g pane-active-border-fg colour12
+
+set -g set-titles on
+set -g set-titles-string "#W -- #H"
+
+bind Space next-window
+bind BSpace previous-window
+
+bind | split-window -h
+bind _ split-window -v
+bind h select-pane -L
+bind l select-pane -R
+bind k select-pane -U
+bind j select-pane -D
+
+bind . command-prompt -p "Window number:" "swap-window -t '%%'"
+
+set -g bell-on-alert on
+
+set -g destroy-unattached on
+
+set -g default-shell /bin/zsh
+set -g default-command /bin/zsh
+# ----
+new-session -d -s main
+set -t main destroy-unattached off
