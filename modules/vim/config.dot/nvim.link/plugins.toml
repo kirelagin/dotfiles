@@ -112,6 +112,10 @@
 [[plugins]]
   repo = 'tpope/vim-obsession'
 
+[[plugins]]
+  repo = 'tpope/vim-speeddating'
+  lazy = 1
+
 
 ##########
 ##
@@ -216,6 +220,7 @@
 
 [[plugins]]
   repo = 'jceb/vim-orgmode'
+  depends = 'vim-speeddating'
   on_ft = 'org'
 
 
