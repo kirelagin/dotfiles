@@ -193,7 +193,7 @@
 
 [[plugins]]
   repo = 'mattn/gist-vim'
-  depends = 'webapi'
+  depends = 'webapi-vim'
   hook_add = '''
     let g:gist_update_on_write=2  " Update gists on :w!
   '''
@@ -222,6 +222,7 @@
   repo = 'jceb/vim-orgmode'
   depends = 'vim-speeddating'
   on_ft = 'org'
+  lazy = 0
 
 
 # Programming
@@ -229,6 +230,7 @@
 [[plugins]]
   repo = 'tpope/vim-git'
   on_ft = ['git', 'gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail']
+  lazy = 0
 
 [[plugins]]
   repo = 'LnL7/vim-nix'
@@ -241,7 +243,9 @@
 [[plugins]]
   repo = 'pangloss/vim-javascript'
   on_ft = 'javascript'
+  lazy = 0
 
 [[plugins]]
   repo = 'kchmck/vim-coffee-script'
   on_ft = ['coffee', 'litcoffee']
+  lazy = 0
