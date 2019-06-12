@@ -39,6 +39,7 @@ endif
 
 colors inkpot
 hi Normal gui=NONE guifg=#cfbfad guibg=#2e2e31
+hi LineNr gui=NONE guifg=#3a3a51 guibg=#2e2e2e
 
 set noswapfile
 set hidden
@@ -128,5 +129,5 @@ if (has("termguicolors"))
 endif
 
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+highlight OverLength guibg=#592929
+match OverLength /\%81v./
