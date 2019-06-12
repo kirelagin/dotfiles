@@ -15,12 +15,14 @@ color.uda.priority.L =
 color.uda.priority.W = gray14
 
 # Next adjustments
-report.next.filter = +READY limit:page
+report.next.filter = +READY limit:page -spb
 
 
 # Some select tags
 urgency.user.tag.health.coefficient = +3.0
 
-
 # Contexts
 context.work = project:srk
+
+# Tweaks
+search.case.sensitive = no
