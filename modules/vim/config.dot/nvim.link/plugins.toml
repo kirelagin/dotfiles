@@ -113,6 +113,9 @@
   repo = 'tpope/vim-obsession'
 
 [[plugins]]
+  repo = 'jamessan/vim-gnupg'
+
+[[plugins]]
   repo = 'tpope/vim-speeddating'
   lazy = 1
 
@@ -222,7 +225,7 @@
   repo = 'jceb/vim-orgmode'
   depends = 'vim-speeddating'
   on_ft = 'org'
-  lazy = 0
+  lazy = 1
 
 
 # Programming
@@ -248,4 +251,14 @@
 [[plugins]]
   repo = 'kchmck/vim-coffee-script'
   on_ft = ['coffee', 'litcoffee']
+  lazy = 0
+
+[[plugins]]
+  repo = 'elixir-editors/vim-elixir'
+  on_ft = ['elixir']
+  lazy = 0
+
+[[plugins]]
+  repo = 'hashivim/vim-terraform'
+  on_ft = ['terraform']
   lazy = 0
