@@ -147,35 +147,42 @@
   repo = 'Shougo/denite.nvim'
   hook_add = '''
     call denite#custom#option('default', {
-      \ 'auto-preview': 'true',
+      \ 'auto-action': 'preview',
       \ 'auto-resize': 'true',
-      \ 'direction': 'dynamicbottom',
-      \ 'matchers': 'substring',
       \ 'vertical-preview': 'true',
       \ 'winheight': '10',
       \ })
-    call denite#custom#map(
-      \ 'insert',
-      \ '<C-j>',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-    call denite#custom#map(
-      \ 'insert',
-      \ '<C-k>',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \ )
-    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-    call denite#custom#var('file_rec/git', 'command',
+    autocmd FileType denite call s:denite_my_settings()
+    function! s:denite_my_settings() abort
+      nnoremap <silent><buffer><expr> p
+      \ denite#do_map('do_action', 'preview')
+    endfunction
+    autocmd FileType denite-filter call s:denite_filter_my_settings()
+    function! s:denite_filter_my_settings() abort
+      noremap <silent><buffer><expr> <C-c>
+        \ denite#do_map('quit')
+      inoremap <silent><buffer> <C-j>
+        \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+      inoremap <silent><buffer> <C-k>
+        \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+      inoremap <silent><buffer><expr> <CR>
+        \ denite#do_map('do_action')
+      inoremap <silent><buffer><expr> <C-s>
+        \ denite#do_map('do_action', 'split')
+      inoremap <silent><buffer><expr> <C-v>
+        \ denite#do_map('do_action', 'vsplit')
+    endfunction
+    call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+    call denite#custom#var('file/rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
     nnoremap <silent> <C-p> :<C-u>Denite
+      \ -start-filter
       \ -highlight-matched-char=Underlined
       \ -highlight-matched-range=None
-      \ -matchers=matcher_substring
+      \ -matchers=matcher/substring
       \ buffer
-      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+      \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
   '''
 
 [[plugins]]
