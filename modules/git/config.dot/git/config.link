@@ -11,6 +11,9 @@
 [core]
 	pager = less -+F -X
 
+[grep]
+	patternType = perl
+
 [alias]
 	st = status
 	unstage = reset HEAD --
