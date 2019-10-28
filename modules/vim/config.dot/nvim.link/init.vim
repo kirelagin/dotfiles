@@ -76,6 +76,10 @@ set splitbelow
 set splitright
 set laststatus=2
 
+if (exists(":tnoremap"))
+  tnoremap <C-w> <C-\><C-N><C-w>
+endif
+
 noremap <C-h> :tabp<CR>
 noremap <C-l> :tabn<CR>
 
