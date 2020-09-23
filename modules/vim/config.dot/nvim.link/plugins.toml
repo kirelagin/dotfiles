@@ -119,6 +119,9 @@
   repo = 'tpope/vim-speeddating'
   lazy = 1
 
+[[plugins]]
+  repo = 'qpkorr/vim-bufkill'
+
 
 ##########
 ##
@@ -202,6 +205,12 @@
   repo = 'tpope/vim-rhubarb'
 
 [[plugins]]
+  repo = 'shumphrey/fugitive-gitlab.vim'
+  hook_add = '''
+    let g:fugitive_gitlab_domains = ['https://gitlab.haskell.org']
+  '''
+
+[[plugins]]
   repo = 'mattn/gist-vim'
   depends = 'webapi-vim'
   hook_add = '''
@@ -265,7 +274,12 @@
   on_ft = ['elixir']
   lazy = 0
 
+# [[plugins]]
+#   repo = 'hashivim/vim-terraform'
+#   on_ft = ['terraform']
+#   lazy = 0
+
 [[plugins]]
-  repo = 'hashivim/vim-terraform'
-  on_ft = ['terraform']
+  repo = 'leafgarland/typescript-vim'
+  on_ft = ['typescript']
   lazy = 0

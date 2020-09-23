@@ -40,6 +40,7 @@ endif
 colors inkpot
 hi Normal gui=NONE guifg=#cfbfad guibg=#2e2e31
 hi LineNr gui=NONE guifg=#3a3a51 guibg=#2e2e2e
+"hi Normal guibg=NONE ctermbg=NONE
 
 set noswapfile
 set hidden
@@ -78,6 +79,8 @@ set laststatus=2
 
 if (exists(":tnoremap"))
   tnoremap <C-w> <C-\><C-N><C-w>
+"  au BufEnter term://* startinsert
+  au TermOpen * au BufEnter <buffer> startinsert
 endif
 
 noremap <C-h> :tabp<CR>
