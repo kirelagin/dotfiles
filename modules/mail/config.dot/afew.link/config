@@ -1,0 +1,10 @@
+[SpamFilter]
+[KillThreadsFilter]
+[ArchiveSentMailsFilter]
+
+[Filter.1]
+query = 'from:monitoring@serokell.io OR from:alert@uptimerobot.com'
+tags = +alert
+message = Monitoring alerts
+
+[InboxFilter]

@@ -1,0 +1,17 @@
+[database]
+# path=mail
+path=/Users/kirelagin/mail
+
+[maildir]
+synchronize_flags=true
+
+[user]
+name=Kirill Elagin
+primary_email=kirelagin@serokell.io
+
+[new]
+tags=new;
+ignore=/.*[.](json|lock|bak)$/
+
+[search]
+exclude_tags=killed;spam;
