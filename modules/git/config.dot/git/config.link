@@ -22,6 +22,8 @@
 	log = log --format=my-signature
 	glog = log --graph --date-order --format=my-signature
 	sign = commit --amend --no-edit -S
+	scrub = reset --hard @{u}
+	hash = rev-parse HEAD
 
 [pretty]
 	my = format:"%C(auto)%h% d%Creset%nDate:   %ai%nAuthor: %aN <%aE>%n%n    %s%n"

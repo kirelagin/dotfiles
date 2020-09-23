@@ -1,5 +1,10 @@
 .DS_Store
+
 /.hg/
 .hg*
+
 /Session.vim
-/tags
+tags
+
+/result
+/result-*
