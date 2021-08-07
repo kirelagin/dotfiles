@@ -1,7 +1,0 @@
-:set prompt "\ESC[7mλ>\ESC[m "
-:set prompt-cont " > "
-
-:set -freverse-errors
-:set -Wall -Wcompat -fwarn-incomplete-uni-patterns
-
-:set +m

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-fn="$1"
-shift
-
-ghc "$fn" -fforce-recomp -ddump-simpl -dsuppress-idinfo -dsuppress-coercions -dsuppress-uniques -dsuppress-module-prefixes "$@"
